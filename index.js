@@ -18,10 +18,10 @@ app.set('view engine', 'html')
 
 
 app.post('/', urlencodedParser, (req,res) => {
-	let i = req.body.number1;
-	let j = req.body.number2;
-	let total = parseInt(i)+parseInt(j);
-	res.render('index.html', {total: total})
+	let i = req.body.number1; // lấy number1 ở url
+	let j = req.body.number2; // lấy number2 ở url
+	let total = parseInt(i)+parseInt(j);// cộng hai số
+	res.render('index.html', {total: total}) // trả kết quả về client
 })
 
 app.get('/', (req,res) => {

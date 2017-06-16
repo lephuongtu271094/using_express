@@ -34,8 +34,8 @@ const storage = multer.diskStorage({
 	}
 })
 
-function fileFilter(req, file, cb) {
-	if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
+function fileFilter(req, file, cb) { // hàm kiểm tra đuôi file
+	if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') { // nếu là đuôi png,jpg,jpeg
 		cb(null, true)
 	} else {
 		cb(new Error(file.mimetype + ' is not accepted'))

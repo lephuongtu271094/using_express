@@ -1,14 +1,13 @@
+/**
+ * sử dụng module multer để upload file
+**/
 const express = require('express');
 const nunjucks = require('nunjucks');
-// const bodyParser = require("body-parser")
 const multer = require('multer');
-const fs = require('fs')
-  , gm = require('gm').subClass({imageMagick: true});
-const path = require('path')
 
 
 const app = express();
-
+//cấu hình nunjucks
 nunjucks.configure('views', {
 	autoescape: true,
 	cache: false,
@@ -44,7 +43,6 @@ function fileFilter(req, file, cb) { // hàm kiểm tra đuôi file
 
 app.upload = multer({storage: storage , fileFilter:fileFilter})
 app.post('/upload',app.upload.single('photo'),function(req,res){
-	
     res.send('upload thanh cong')
 })
 

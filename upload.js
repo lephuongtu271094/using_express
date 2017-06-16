@@ -1,6 +1,6 @@
 /**
  * sử dụng module multer để upload file
- * gm chỉnh sửa hình ảnh
+ * moduls gm chỉnh sửa hình ảnh
 **/
 const express = require('express');
 const nunjucks = require('nunjucks');
@@ -56,9 +56,9 @@ app.post('/upload',app.upload.single('photo'),function(req,res){
 	.drawText(100, 350, req.file.originalname) // text
 	.write('./public/update/'+req.file.originalname, function (err) { // viết ra file mới
 	  if (!err) console.log('done');
-	});
 
-    res.render('upload.html',{image: req.file.originalname} )
+	  res.render('upload.html',{image: req.file.originalname} )
+	});
 
 })
 

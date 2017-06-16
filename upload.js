@@ -1,10 +1,12 @@
 /**
  * sử dụng module multer để upload file
+ * gm chỉnh sửa hình ảnh
 **/
 const express = require('express');
 const nunjucks = require('nunjucks');
 const multer = require('multer');
-
+const fs = require('fs')
+  , gm = require('gm').subClass({imageMagick: true});
 
 const app = express();
 //cấu hình nunjucks
@@ -14,6 +16,8 @@ nunjucks.configure('views', {
 	express: app,
 	watch: true
 })
+
+app.use('/public' ,express.static('public'));
 
 app.engine('html', nunjucks.render)
 app.set('view engine', 'html')
@@ -25,12 +29,13 @@ app.get('/', (req,res) => {
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		cb(null, './uploads')
+		cb(null, './public/uploads')
 	},
 	filename: function (req, file, cb) {
 		// cb(null, shortid.generate() + '-' + file.originalname)
 		cb(null, file.originalname)
 	}
+
 })
 
 function fileFilter(req, file, cb) { // hàm kiểm tra đuôi file
@@ -43,7 +48,18 @@ function fileFilter(req, file, cb) { // hàm kiểm tra đuôi file
 
 app.upload = multer({storage: storage , fileFilter:fileFilter})
 app.post('/upload',app.upload.single('photo'),function(req,res){
-    res.send('upload thanh cong')
+	// console.log(req.file.path)
+
+	gm(req.file.path)// đường dẫn file
+
+	.font("Helvetica.ttf", 70)// chỉnh font chữ
+	.drawText(100, 350, req.file.originalname) // text
+	.write('./public/update/'+req.file.originalname, function (err) { // viết ra file mới
+	  if (!err) console.log('done');
+	});
+
+    res.render('upload.html',{image: req.file.originalname} )
+
 })
 
 

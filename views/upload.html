@@ -10,5 +10,15 @@
     <input type="file" name="photo"><br>
     <input type="submit" value="Upload Image" name="submit">
 </form>
+
+{% if image %}
+    <p> ảnh viết chữ </p>
+    <img src="/public/update/{{image}}" >
+    <p> ảnh update </p>
+    <img src="/public/uploads/{{image}}" >
+{% endif %}
+
+
+
 </body>
 </html>

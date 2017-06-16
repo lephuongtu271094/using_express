@@ -13,4 +13,4 @@ file index.js sử dụng phương thức post
 
 file index2.js sử dụng phương thức get
 
-file upload.js để upload file lên server; tạo file uploads
+file upload.js để upload file lên server; tạo folder uploads

@@ -44,12 +44,12 @@ Hàm lấy hai số và trả về kết quả cho client :
     })
 
 ```
-####req.body
+#### req.body
 Contains key-value pairs of data submitted in the request body. By default, it is undefined, and is populated when you use body-parsing middleware such as body-parser and multer.
 
 The following example shows how to use body-parsing middleware to populate req.body.
 
-##file index2.js
+## file index2.js
 file index2.js sử dụng phương thức get
 
 Trang html :
@@ -85,11 +85,11 @@ Hàm lấy hai số và trả về kết quả cho client :
         })
     })
 ```
-####req.query
+#### req.query
 This property is an object containing a property for each query string parameter in the route. If there is no query string, it is the empty object, {}.
 
 
-##file upload.js
+## file upload.js
 
 Cho phép upload file ảnh từ form.
 

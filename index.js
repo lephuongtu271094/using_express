@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const nunjucks = require('nunjucks');
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 
 // cấu hình nunjucks
 nunjucks.configure('views', {
@@ -11,7 +11,7 @@ nunjucks.configure('views', {
 	watch: true
 })
 
-const urlencodedParser = bodyParser.urlencoded({extended: true})
+const urlencodedParser = bodyParser.urlencoded({extended: true}); //Express route-specific
 
 app.engine('html', nunjucks.render)
 app.set('view engine', 'html')

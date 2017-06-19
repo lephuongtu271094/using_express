@@ -120,9 +120,8 @@ Sử dụng nunjucks :
 ```
 nếu có image thì true,nếu không thì false
 
-##### Hàm upload ảnh
+##### Khởi tạo các thuộc tính của multer
 ```javascript
-    // Khởi tạo các thuộc tính của multer
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
             //nơi chứa file upload
@@ -135,8 +134,10 @@ nếu có image thì true,nếu không thì false
         }
     
     })
-
-    function fileFilter(req, file, cb) { // hàm phân loại file upload
+```
+##### Hàm phân loại file upload
+```javascript
+    function fileFilter(req, file, cb) {
         if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') { // nếu là đuôi png,jpg,jpeg
             // nếu là file image thì upload file.
             cb(null, true)
@@ -145,13 +146,19 @@ nếu có image thì true,nếu không thì false
             cb(new Error(file.mimetype + ' is not accepted'))
         }
     }
-    // các thuộc tính của multer gán cho biến upload
+```
+##### Gán các thuộc tính của multer cho biến upload
+```javascript
     app.upload = multer({storage: storage , fileFilter:fileFilter})
-    //hàm upload , chỉnh sửa hình ảnh , lưu hình upload và hình đã sửa ,
+```
+##### hàm upload , chỉnh sửa hình ảnh , lưu hình upload và hình đã sửa
+
+req.file.path là đường dẫn của file upload
+
+req.file.originalname là tên của file upload
+
+```javascript
     app.post('/upload',app.upload.single('photo'),function(req,res){
-	    // console.log(req.file.path)
-        // req.file.path là đường dẫn của file upload
-        // req.file.originalname là tên của file upload
         gm(req.file.path)// đường dẫn file
     
         .font("Helvetica.ttf", 70)// chỉnh font chữ
@@ -161,7 +168,5 @@ nếu có image thì true,nếu không thì false
     
           res.render('upload.html',{image: req.file.originalname} )
         });
-
     })
-
 ```

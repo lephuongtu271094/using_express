@@ -169,4 +169,22 @@ req.file.originalname là tên của file upload
           res.render('upload.html',{image: req.file.originalname} )
         });
     })
+
+    
 ```
+
+## file upload.js
+upload nhiều file ảnh
+```javascript
+    app.upload.array('photo',12)
+
+```
+cho tất cả các file upload vào một mảng
+
+```
+    {% for i in image %}
+    <img src="/public/uploads/{{i.originalname}}" >
+    {% endfor %}
+
+```
+sử dụng vong lặp để in ra các tên các phần tử
